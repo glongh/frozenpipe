@@ -22,12 +22,20 @@ class Bucket:
     def get_timer(self) -> int:
         return self.__timer
 
-    def refill_counter(self) -> int:
+    def __refill_counter(self) -> int:
         if self.__refill_time <= 0:
             return 0
         else:
-            now = self._clock.time()
-            return int(((now - self.last_update) / self.refill_time))
+            now = self.__timer.time()
+            return int(((now - self.__ts_updated) / self.__refill_time))
 
     def get(self):
-        tokens = min(self.__max_amount, self.__value + self.__refill_t)
+        '''
+        Returns the quantity of available tokens
+        '''
+        print(self.__max_amount, self.__refill_counter(),
+              self.__refill_amount)
+        tokens = min(self.__max_amount, self.__refill_counter() +
+                     self.__refill_amount)
+
+        return tokens
