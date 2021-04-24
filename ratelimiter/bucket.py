@@ -29,13 +29,36 @@ class Bucket:
             now = self.__timer.time()
             return int(((now - self.__ts_updated) / self.__refill_time))
 
-    def get(self):
-        '''
+    def get_tokens(self) -> int:
+        """
         Returns the quantity of available tokens
-        '''
-        print(self.__max_amount, self.__refill_counter(),
-              self.__refill_amount)
-        tokens = min(self.__max_amount, self.__refill_counter() +
-                     self.__refill_amount)
-
+        """
+        tokens = min(self.__max_amount, self.__refill_counter() *
+                     self.__refill_amount + self.__value)
         return tokens
+
+    def reset(self) -> None:
+        self.__value = self.__max_amount
+        self.__ts_updated = self.__timer.time()
+
+    def reduce(self, tokens_to_use: int) -> bool:
+        """
+        Returns a boolean value indicating if the tokens requested can be used and
+        removes them from the bucket.
+        """
+
+        refill_count = self.__refill_counter()
+        self.__value += refill_count * self.__refill_amount
+        self.__ts_updated += refill_count * self.__refill_time
+
+        # Check If the values refilled exceed the maximun allowed. If so, reset to initial state.
+        if self.__value >= self.__max_amount:
+            self.reset()
+
+        # Check if the tokens requested are more thant the amount available in the bucket
+        if tokens_to_use > self.__value:
+            return False
+        else:
+            # Otherwise, update the bucket value and return true
+            self.__value -= tokens_to_use
+            return True
