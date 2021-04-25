@@ -1,6 +1,8 @@
-# Frozen Pipe
+# Frozen Pipe :stopwatch: :wastebasket: :snowflake:
 
-A python implementation of a general purpose rate limiter
+> Important: This is a python 3 module
+
+A python3 implementation of a general purpose rate limiter
 
 ## What’s a rate limiter?
 
@@ -63,6 +65,9 @@ print rate_limiter.get_buckets_status()
 If you use any virtual env, activate it .
 
 ```bash
+# Create virtual env (optional)
+python -m venv env
+# Activate virtual env (optional)
 source env/bin/activate
 ```
 
