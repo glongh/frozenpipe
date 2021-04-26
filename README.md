@@ -2,6 +2,8 @@
 
 > Important: This is a python 3 module
 
+<img src="images/frozen_pipe.png" width=300/>
+
 A python3 implementation of a general purpose rate limiter
 
 ## What’s a rate limiter?
@@ -22,6 +24,8 @@ Token buckets with customizable refill amounts let you express more complex rate
 - “Each geocoded shipping address is allowed a maximum of $200 worth of purchases per day from a risky country email addresses, which refills at a rate of $50 per day”.
 
 As you can see, these rate limits allow a lot of freedom for legitimate user behavior, but quickly clamp down on repeated violations.
+
+<img src="images/rate_limiter.jpg" width=900/>
 
 ## Quick start
 
